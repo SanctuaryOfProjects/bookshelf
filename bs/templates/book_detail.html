@@ -1,0 +1,42 @@
+{% block content %}
+  <h2>{{ book.title }}</h2>
+  
+  {% if book.cover_image %}
+    <img src="{{ book.cover_image.url }}" alt="Обложка книги" style="max-width: 300px;">
+  {% endif %}
+
+  <p><strong>Автор:</strong> {{ book.author }}</p>
+  <p><strong>Категория:</strong> {{ book.category }}</p>
+  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+  <p><strong>Дата публикации:</strong> {{ book.publication_date }}</p>
+  <p><strong>Издатель:</strong> {{ book.publisher }}</p>
+  <p><strong>Язык:</strong> {{ book.language }}</p>
+  <p><strong>Формат:</strong> {{ book.get_format_display }}</p>
+  <p><strong>Описание:</strong> {{ book.description }}</p>
+
+  {% if book.file %}
+    <a href="{{ book.file.url }}" download>Скачать файл</a>
+  {% endif %}
+
+  <h3>Отзывы</h3>
+  <ul>
+    {% for review in reviews %}
+      <li>
+        <strong>{{ review.user.username }}</strong>: {{ review.feedback }} (Оценка: {{ review.value }})
+      </li>
+    {% empty %}
+      <li>Нет отзывов для этой книги.</li>
+    {% endfor %}
+  </ul>
+
+  {% if user.is_authenticated %}
+    <h3>Оставьте отзыв</h3>
+    <form method="post">
+      {% csrf_token %}
+      {{ review_form.as_p }}
+      <button type="submit">Отправить</button>
+    </form>
+  {% else %}
+    <p>Для оставления отзыва <a href="{% url 'login' %}">войдите в систему</a>.</p>
+  {% endif %}
+{% endblock %}

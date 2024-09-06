@@ -1,0 +1,73 @@
+{% load static %}
+
+{% block nav_block %}
+
+<h3>Навигация</h3>
+
+<a href="#">Новости</a>
+<a href="#">О библиотеке</a>
+<a href="{% url 'book_list' %}">Каталог</a>
+<a href="#">Нормативные документы</a>
+<a href="#">Услуги</a>
+<a href="#">Ресурсы</a>
+<a href="#">Клубы</a>
+<a href="#">Развлечения</a>
+
+{% endblock %}
+
+<hr>
+
+<h3>Авторизация/Регистрация</h3>
+
+{% if user.is_authenticated %}
+  {% if user.is_active %}
+    <a href="{% url 'cabinet' %}">{{ user.username }}</a>
+  {% endif %}
+    <a href="{% url 'logout' %}">Выйти</a>
+{% else %}
+    <a href="{% url 'register' %}">Регистрация</a>
+    <a href="{% url 'login' %}">Войти</a>
+{% endif %}
+
+<hr>
+
+<h3>Быстрые ссылки</h3>
+
+<a href="https://karlib.kz/ru/poslanie-prezidenta">Послание президента</a>
+<a href="https://karlib.kz/ru/gosudarstvennye-simvoly">Послание президента</a>
+<a href="https://karlib.kz/ru/vzglyad-v-budushchee-modernizatsiya-obshchestvennogo-soznaniya">Взгляд в будущее: модернизация общественного сознания</a>
+<a href="https://www.gov.kz/memleket/entities/karaganda-madeniet?lang=ru">Управление культуры, архивов и документации</a>
+
+<hr>
+
+<h3>Рекомендации</h3>
+
+<a href="#">Что почитать?</a>
+<a href="#">Бук-кроссинг для всех</a>
+
+<hr>
+
+<h3>Развлечения</h3>
+
+<a href="#">Клубы</a>
+<a href="#">Квизы</a>
+
+<hr>
+
+<h3>Библиотека рекомендует (книги месяца)</h3>
+
+*штук 6 книг вывести*
+
+<hr>
+
+<h3>Обратная связь</h3>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
+
+
+
+

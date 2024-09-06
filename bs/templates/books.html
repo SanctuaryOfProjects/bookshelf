@@ -1,0 +1,22 @@
+{% load static %}
+
+{% block content %}
+  <h2>Список книг</h2>
+
+  <form method="get">
+    {{ form.as_p }}
+    <button type="submit">Поиск</button>
+  </form>
+
+  <ul>
+    {% for book in books %}
+      <li>
+        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+        {% if book.author %} - {{ book.author.name }}{% endif %}
+        {% if book.publisher %} - {{ book.publisher }}{% endif %}
+      </li>
+    {% empty %}
+      <li>Нет книг, удовлетворяющих выбранным критериям.</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
