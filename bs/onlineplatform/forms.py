@@ -33,6 +33,7 @@ class FeedbackForm(forms.ModelForm):
 
 class BookSearchForm(forms.Form):
     title = forms.CharField(required=False, label='Название книги')
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False, label='Категория')
     author = forms.CharField(required=False, label='Авторы')
     publisher = forms.CharField(required=False, label='Издатель')
     language = forms.CharField(required=False, label='Язык')

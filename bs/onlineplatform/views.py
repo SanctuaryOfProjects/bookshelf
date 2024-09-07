@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import *
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login
 
 def register(request):
     if request.method == 'POST':
@@ -35,6 +37,8 @@ def book_list(request):
     if form.is_valid():
         if form.cleaned_data['title']:
             books = books.filter(title__icontains=form.cleaned_data['title'])
+        if form.cleaned_data['category']:
+            books = books.filter(category=form.cleaned_data['category'])
         if form.cleaned_data['author']:
             books = books.filter(author=form.cleaned_data['author'])
         if form.cleaned_data['publisher']:
