@@ -1,0 +1,40 @@
+<h2>Профиль пользователя</h2>
+<br>
+<a href="{% url 'bookshelf' %}">Моя книжная полка</a>
+<a href="#">Мои комментарии</a>
+<a href="#">Мои обсуждения</a>
+<a href="#">Обратная связь</a>
+<a href="#">Рекомендации</a>
+<br>
+{% if user_profile.full_name %}
+  <p><strong>ФИО:</strong> {{ user_profile.full_name }}</p>
+{% endif %}
+{% if user_profile.photo %}
+<img src="{{ user_profile.photo.url }}" alt="Фото" style="max-width: 200px;">
+{% endif %}
+{% if user_profile.birth_date %}
+  <p><strong>Дата рождения:</strong> {{ user_profile.birth_date|date:"d/m/Y" }}</p>
+{% endif %}
+{% if user_profile.user.email %}
+  <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
+{% endif %}
+{% if user_profile.phone_number %}
+  <p><strong>Номер телефона:</strong> {{ user_profile.phone_number }}</p>
+{% endif %}
+<br>
+<a href="{% url 'edit_profile' %}" class="btn btn-dark">Редактировать профиль</a>
+</div>
+
+{% if form.errors %}
+  <!-- Отображение ошибок формы -->
+  <p>Исправьте следующие ошибки:</p>
+  {{ form.errors }}
+{% endif %}
+
+<!-- Отображение формы -->
+<h3>Заполнить профиль</h3>
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Сохранить</button>
+</form>

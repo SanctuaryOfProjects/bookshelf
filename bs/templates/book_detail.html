@@ -18,6 +18,13 @@
     <a href="{{ book.file.url }}" download>Скачать файл</a>
   {% endif %}
 
+  <form method="post">
+    {% csrf_token %}
+    {{ add_to_bookshelf_form.as_p }}
+    <input type="hidden" name="book_id" value="{{ book.id }}">
+    <button type="submit" name="add_to_bookshelf_submit" class="btn btn-primary">Добавить на полку</button>
+  </form>
+
   <h3>Отзывы</h3>
   <ul>
     {% for review in reviews %}

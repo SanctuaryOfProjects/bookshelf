@@ -22,7 +22,10 @@ from django.conf import settings
 
 urlpatterns = [
     path('', index, name='index'),
+    path('add_to_bookshelf/<int:book_id>/', add_to_bookshelf, name='add_to_bookshelf'),
+    path('bookshelf/', bookshelf, name='bookshelf'),
     path('cabinet/', cabinet, name='cabinet'),
+    path('edit_profile/', edit_profile, name='edit_profile'),
     path('catalog/', book_list, name='catalog'),
     path('catalog/<int:pk>/', book_detail, name='book_detail'),
     path('register/', register, name='register'),

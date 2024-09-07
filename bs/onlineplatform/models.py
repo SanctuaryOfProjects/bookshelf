@@ -66,16 +66,14 @@ class UserProfile(models.Model):
     reader_ticket = models.CharField("№ читательского билета", max_length=25, blank=True, null=True)
     favorite_categories = models.ManyToManyField(Category, blank=True, related_name="users", verbose_name="Любимые категории")
 
-    def clean(self):
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
         if self.favorite_categories.count() > 5:
             raise ValidationError("Вы можете выбрать не более 5 любимых категорий.")
 
     def __str__(self):
         return self.user.username
-
-    def save(self, *args, **kwargs):
-        self.clean()  # Выполняем проверку перед сохранением
-        super().save(*args, **kwargs)
     
     class Meta:
         verbose_name_plural = "Профили пользователей"

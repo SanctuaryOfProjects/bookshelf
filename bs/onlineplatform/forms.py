@@ -19,6 +19,14 @@ class RegistrationForm(UserCreationForm):
             raise ValidationError("Пользователь с таким email уже существует.")
         return email
 
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['full_name', 'photo', 'birth_date', 'phone_number', 'reader_ticket', 'favorite_categories']
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
@@ -49,3 +57,12 @@ class ReviewForm(forms.ModelForm):
             'value': forms.NumberInput(attrs={'min': 1, 'max': 5}),
             'feedback': forms.Textarea(attrs={'rows': 4}),
         }
+
+class AddToBookshelfForm(forms.ModelForm):
+    class Meta:
+        model = Bookshelf
+        fields = ['private']  # Убедитесь, что поле private включено в форму
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['private'].widget = forms.RadioSelect(choices=[(True, 'Приватная'), (False, 'Публичная')])

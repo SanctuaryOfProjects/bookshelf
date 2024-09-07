@@ -1,0 +1,16 @@
+<h2>Моя книжная полка</h2>
+
+<ul>
+  {% for bookshelf in bookshelves %}
+    <li>
+      <h3><a href ="{% url 'book_detail' bookshelf.subject.id %}">{{ bookshelf.subject.title }}</a></h3>
+      {% if bookshelf.subject.cover_image %}
+        <img src="{{ bookshelf.subject.cover_image.url }}" alt="Обложка книги" style="max-width: 150px;">
+      {% endif %}
+      <p>Автор: {{ bookshelf.subject.author }}</p>
+      <p>Категория: {{ bookshelf.subject.category }}</p>
+    </li>
+  {% empty %}
+    <li>У вас нет добавленных книг на книжной полке.</li>
+  {% endfor %}
+</ul>
