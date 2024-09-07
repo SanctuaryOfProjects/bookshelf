@@ -66,3 +66,8 @@ class AddToBookshelfForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['private'].widget = forms.RadioSelect(choices=[(True, 'Приватная'), (False, 'Публичная')])
+
+class BookCrossingAdForm(forms.ModelForm):
+    class Meta:
+        model = BookCrossingAd
+        fields = ['title', 'cover_image', 'short_description', 'detailed_description', 'contact_phone', 'contact_info']

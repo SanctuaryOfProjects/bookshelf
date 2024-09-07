@@ -1,1 +1,10 @@
 {% load static %}
+
+<h1>Все объявления бук-кроссинга</h1>
+<ul>
+    {% for ad in ads %}
+        <li>
+            <a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

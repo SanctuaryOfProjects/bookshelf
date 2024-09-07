@@ -160,4 +160,28 @@ def bookshelf(request):
     }
     return render(request, 'bookshelf.html', context)
 
+@login_required
+def my_ads(request):
+    ads = BookCrossingAd.objects.filter(user=request.user)
+    if request.method == 'POST':
+        form = BookCrossingAdForm(request.POST, request.FILES)
+        if form.is_valid():
+            ad = form.save(commit=False)
+            ad.user = request.user
+            ad.save()
+            return redirect('my_ads')
+    else:
+        form = BookCrossingAdForm()
+    context = {'ads': ads, 'form': form}
+    return render(request, 'my_ads.html', context)
+
+def bookcrossing_ads(request):
+    ads = BookCrossingAd.objects.all()
+    return render(request, 'bookcrossing.html', {'ads': ads})
+
+def ads_detail(request, ad_id):
+    ad = BookCrossingAd.objects.get(pk=ad_id)
+    return render(request, 'ad_detail.html', {'ad': ad})
+
+
 

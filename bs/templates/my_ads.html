@@ -1,0 +1,18 @@
+{% load static %}
+<h1>Создать объявление</h1>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Создать</button>
+</form>
+
+<hr>
+
+<h1>Мои объявления</h1>
+<ul>
+    {% for ad in ads %}
+        <li>
+            <a href="#">{{ ad.title }}</a>
+        </li>
+    {% endfor %}
+</ul>

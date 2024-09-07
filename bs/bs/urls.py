@@ -22,6 +22,9 @@ from django.conf import settings
 
 urlpatterns = [
     path('', index, name='index'),
+    path('my_ads/', my_ads, name='my_ads'),
+    path('ad/<int:ad_id>/', ads_detail, name='ad_detail'),
+    path('bookcrossing_ads/', bookcrossing_ads, name='bookcrossing_ads'),
     path('add_to_bookshelf/<int:book_id>/', add_to_bookshelf, name='add_to_bookshelf'),
     path('bookshelf/', bookshelf, name='bookshelf'),
     path('cabinet/', cabinet, name='cabinet'),
