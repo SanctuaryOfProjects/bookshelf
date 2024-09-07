@@ -52,7 +52,7 @@ def book_list(request):
         'form': form,
         'books': books
     }
-    return render(request, 'books.html', context)
+    return render(request, 'catalog.html', context)
 
 def book_detail(request, pk):
     book = get_object_or_404(Book, pk=pk)

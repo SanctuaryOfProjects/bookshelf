@@ -22,8 +22,8 @@ from django.conf import settings
 
 urlpatterns = [
     path('', index, name='index'),
-    path('books/', book_list, name='book_list'),
-    path('books/<int:pk>/', book_detail, name='book_detail'),
+    path('catalog/', book_list, name='catalog'),
+    path('catalog/<int:pk>/', book_detail, name='book_detail'),
     path('register/', register, name='register'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),

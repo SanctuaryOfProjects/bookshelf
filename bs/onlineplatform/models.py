@@ -17,12 +17,18 @@ class Club(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name_plural = "Клубы"
 
 class GalleryImage(models.Model):
     image = models.ImageField("Изображение", upload_to="club_gallery/")
 
     def __str__(self):
         return f"Image {self.id}"
+    
+    class Meta:
+        verbose_name_plural = "Фотогалерея"
     
 #Новость
 
@@ -71,8 +77,12 @@ class UserProfile(models.Model):
         self.clean()  # Выполняем проверку перед сохранением
         super().save(*args, **kwargs)
     
+    class Meta:
+        verbose_name_plural = "Профили пользователей"
+    
     
 #Автор
+"""
 class Author(models.Model):
     name = models.CharField("ФИО", max_length=255)
     description = models.TextField("Биография")
@@ -82,6 +92,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name
+"""
     
 #Книга
 
@@ -92,7 +103,7 @@ class Book(models.Model):
     ]
 
     title = models.CharField("Название книги", max_length=255)
-    author = models.ForeignKey(Author, on_delete=models.SET_NULL, null=True, related_name='books')
+    author = models.CharField("Авторы", max_length=255)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, related_name='books')
     isbn = models.CharField("ISBN", max_length=13, unique=True)
     publication_date = models.DateField("Дата публикации", blank=True, null=True)
