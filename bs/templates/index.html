@@ -1,59 +1,158 @@
+{% extends 'base.html' %}
 {% load static %}
 
 {% block nav_block %}
 
-<h3>Навигация</h3>
-
-<a href="#">Новости</a>
-<a href="#">О библиотеке</a>
-<a href="{% url 'catalog' %}">Каталог</a>
-<a href="#">Нормативные документы</a>
-<a href="#">Услуги</a>
-<a href="#">Ресурсы</a>
-<a href="#">Клубы</a>
-<a href="#">Развлечения</a>
+<li class="nav-item">
+    <a class="nav-link" href="#">Новости</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      О библиотеке
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Как нас найти</a></li>
+        <li><a class="dropdown-item" href="#">История и современность</a></li>
+        <li><a class="dropdown-item" href="#">Руководители</a></li>
+        <li><a class="dropdown-item" href="#">Отделы</a></li>
+        <li><a class="dropdown-item" href="#">Документация</a></li>
+        <li><a class="dropdown-item" href="#">СМИ о нас</a></li>
+        
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Каталог
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{% url 'catalog' %}">Книги</a></li>
+        <li><a class="dropdown-item" href="#">Нормативные документы</a></li>
+    </ul>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Услуги
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">Online продление книг</a></li>
+        <li><a class="dropdown-item" href="#">Задать вопрос</a></li>
+        <li><a class="dropdown-item" href="#">Доставка документов</a></li>
+        <li><a class="dropdown-item" href="#">Центр "Парасат Жолы"</a></li>
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Ресурсы</a>
+  </li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Клубы
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="#">"Научный калейдоскоп"</a></li>
+        <li><a class="dropdown-item" href="#">Разговорный английский для детей</a></li>
+        <li><a class="dropdown-item" href="#">Клуб "Краевед"</a></li>
+        <li><a class="dropdown-item" href="#">Клуб "Қазақша сөйлесейік"</a></li>
+        <li><a class="dropdown-item" href="#">Клуб мастеров</a></li>
+        <li><a class="dropdown-item" href="#">Кружок "Юный краевед"</a></li>
+    </ul>
+  </li>
+<li class="nav-item">
+    <a class="nav-link" href="#">Досуг</a>
+  </li>
 
 {% endblock %}
 
-<hr>
+{% block content %}
 
-<h3>Авторизация/Регистрация</h3>
-
-{% if user.is_authenticated %}
-  {% if user.is_active %}
-    <a href="{% url 'cabinet' %}">{{ user.username }}</a>
-  {% endif %}
-    <a href="{% url 'logout' %}">Выйти</a>
-{% else %}
-    <a href="{% url 'register' %}">Регистрация</a>
-    <a href="{% url 'login' %}">Войти</a>
-{% endif %}
-
-<hr>
-
-<h3>Быстрые ссылки</h3>
-
-<a href="https://karlib.kz/ru/poslanie-prezidenta">Послание президента</a>
-<a href="https://karlib.kz/ru/gosudarstvennye-simvoly">Послание президента</a>
-<a href="https://karlib.kz/ru/vzglyad-v-budushchee-modernizatsiya-obshchestvennogo-soznaniya">Взгляд в будущее: модернизация общественного сознания</a>
-<a href="https://www.gov.kz/memleket/entities/karaganda-madeniet?lang=ru">Управление культуры, архивов и документации</a>
-
-<hr>
-
-<h3>Рекомендации</h3>
-
-<a href="#">Что почитать?</a>
-<a href="#">Бук-кроссинг для всех</a>
-<a href="#">Форум</a>
+<div>
+    <!-- Офферная секция -->
+    <div class="row align-items-center" style="background-image: url('{% static 'img/backoffer.png' %}'); background-size: cover; background-position: center; height: 400px;">
+        <div class="col-6 d-flex justify-content-end align-items-left">
+            <!-- Изображение справа -->
+            <img src="{% static 'img/offer.png' %}" alt="Offer Image" class="img-fluid">
+        </div>
+        <div class="col-3 d-flex flex-column justify-content-end ps-4">
+            <!-- Кнопки слева -->
+            {% if user.is_authenticated %}
+                {% if user.is_active %}
+                    <a href="{% url 'cabinet' %}" class="btn btn-primary mb-2">{{ user.username }}</a>
+                {% endif %}
+                <a href="{% url 'logout' %}" class="btn btn-primary">{{ 'Выйти' }}</a>
+            {% else %}
+                <a href="{% url 'register' %}" class="btn btn-primary mb-2">Регистрация</a>
+                <a href="{% url 'login' %}" class="btn btn-primary">Войти</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 
 <hr>
 
-<h3>Развлечения</h3>
-
-<a href="#">Клубы</a>
-<a href="#">Квизы</a>
-
-<hr>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <h3 class="mb-4">Быстрые ссылки</h3>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-book me-3 text-primary fs-4"></i>
+                    <a href="https://karlib.kz/ru/poslanie-prezidenta" class="text-decoration-none fs-5">Послание президента</a>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-flag me-3 text-success fs-4"></i>
+                    <a href="https://karlib.kz/ru/gosudarstvennye-simvoly" class="text-decoration-none fs-5">Государственные символы</a>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-lightbulb me-3 text-warning fs-4"></i>
+                    <a href="https://karlib.kz/ru/vzglyad-v-budushchee-modernizatsiya-obshchestvennogo-soznaniya" class="text-decoration-none fs-5">Взгляд в будущее</a>
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-building me-3 text-danger fs-4"></i>
+                    <a href="https://www.gov.kz/memleket/entities/karaganda-madeniet?lang=ru" class="text-decoration-none fs-5">Управление культуры</a>
+                </li>
+            </ul>
+        </div>
+        <!-- Вторая колонка: Рекомендации в виде маленьких карточек -->
+        <div class="col-md-4">
+            <h3>Рекомендации</h3>
+            <br>
+            <div class="card mb-3" style="max-width: 20rem;">
+                <img src="{% static 'img/1.png' %}" class="card-img-top" alt="Что почитать?">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <h6 class="card-title text-light">Что почитать?</h6>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 20rem;">
+                <img src="{% static 'img/2.png' %}" class="card-img-top" alt="Бук-кроссинг для всех">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <h6 class="card-title text-light">Бук-кроссинг для всех</h6>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 20rem;">
+                <img src="{% static 'img/3.png' %}" class="card-img-top" alt="Форум">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <h6 class="card-title text-light">Форум</h6>
+                </div>
+            </div>
+        </div>
+        <!-- Третья колонка: Досуг в виде маленьких карточек -->
+        <div class="col-md-4">
+            <h3>Досуг</h3>
+            <br>
+            <div class="card mb-3" style="max-width: 20rem;">
+                <img src="{% static 'img/4.png' %}" class="card-img-top" alt="Клубы">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <h6 class="card-title text-light">Клуб мастеров</h6>
+                </div>
+            </div>
+            <div class="card mb-3" style="max-width: 20rem;">
+                <img src="{% static 'img/5.png' %}" class="card-img-top" alt="Квизы">
+                <div class="card-img-overlay d-flex align-items-center justify-content-center">
+                    <h6 class="card-title text-light">Пройди квиз и узнай - кто ты из вселенной Мастера и Маргариты</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <h3>Библиотека рекомендует (книги месяца)</h3>
 
@@ -68,6 +167,8 @@
     {{ form.as_p }}
     <button type="submit">Отправить</button>
 </form>
+
+{% endblock %}
 
 
 
