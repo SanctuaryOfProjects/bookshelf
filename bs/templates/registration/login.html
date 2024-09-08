@@ -1,11 +1,40 @@
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block nav_block %}
+<section class="container">
+  <a
+    href="{% url 'index' %}"
+    style="
+      text-decoration: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: none;
+    "
+  >
+    Вернуть на Главную страницу
+  </a>
+</section>
+{% endblock %} {% block content %}
 
-<a href="{% url 'index' %}">Главная</a>
+<section class="container mt-3">
+  <h2>Вход в систему</h2>
+  <div style="display: flex; justify-content: center">
+    <form class="mt-5" style="max-width: 700px" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <label for="">Username</label>
+        <div class="col-12 mb-1">{{ form.username }}</div>
+        <label for="">Пароль</label>
+        <div class="col-12 mb-3">{{ form.password }}</div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">
+            Зарегистрироваться
+          </button>
+        </div>
+      </div>
+      <p>Нет аккаунта: <a href="{% url 'register' %}">Регистрация</a></p>
+    </form>
+  </div>
+</section>
 
-<h2>Вход в систему</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Войти</button>
-  </form>
-<p>Нет аккаунта: <a href="{% url 'register' %}">Регистрация</a></p>
+{% endblock %}

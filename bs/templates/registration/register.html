@@ -1,10 +1,42 @@
-{% load static %}
-
-<a href="{% url 'index' %}">Главная</a>
-
-<h2>Регистрация</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Регистрация</button>
+{% extends 'base.html' %} {% load static %} {% block nav_block %}
+<section class="container">
+  <a
+    href="{% url 'index' %}"
+    style="
+      text-decoration: none;
+      color: inherit;
+      border: none;
+      padding: 0;
+      margin: 0;
+      background: none;
+    "
+  >
+    Вернуть на Главную страницу
+  </a>
+</section>
+{% endblock %} {% block content %}
+<section class="container mt-3">
+  <h2>Регистрация</h2>
+  <div style="display: flex; justify-content: center">
+    <form class="mt-5" style="max-width: 500px" method="POST">
+      {% csrf_token %}
+      <div class="row">
+        <label for="">Username</label>
+        <div class="col-12">{{ form.username }}</div>
+        <label for="">Почта</label>
+        <div class="col-12">{{ form.email }}</div>
+        <label for="">Пароль</label>
+        <div class="col-12">{{ form.password1 }}</div>
+        <label for="">Повторите пароль</label>
+        <div class="col-12">{{ form.password2 }}</div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">
+            Зарегистрироваться
+          </button>
+        </div>
+      </div>
     </form>
+  </div>
+</section>
+
+{% endblock %}

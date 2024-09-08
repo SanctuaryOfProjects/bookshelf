@@ -6,18 +6,27 @@ from django.contrib.auth.models import User
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(
         max_length=254,
-        help_text='Обязательное поле. Введите действующий адрес электронной почты.'
+        help_text='Обязательное поле. Введите действующий адрес электронной почты.',
+        widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Введите email'})
     )
-
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
-
+        widgets = {
+            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Введите имя пользователя'}),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Введите пароль'}),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control', 'placeholder': 'Повторите пароль'}),
+        }
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
             raise ValidationError("Пользователь с таким email уже существует.")
         return email
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Применение классов Bootstrap ко всем полям
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control mb-3'})
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -60,7 +69,6 @@ class FeedbackForm(forms.ModelForm):
         # Применение классов Bootstrap ко всем полям
         for field in self.fields.values():
             field.widget.attrs.update({'class': 'form-control mb-3'})
-
 
 class BookSearchForm(forms.Form):
     title = forms.CharField(
