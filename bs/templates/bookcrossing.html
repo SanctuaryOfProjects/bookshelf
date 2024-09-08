@@ -1,10 +1,12 @@
-{% load static %}
-
-<h1>Все объявления бук-кроссинга</h1>
-<ul>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="container mt-3">
+  <h3>Все объявления бук-кроссинга</h1>
+  <ul>
     {% for ad in ads %}
-        <li>
-            <a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
-        </li>
+    <li>
+      <a href="{% url 'ad_detail' ad.id %}">{{ ad.title }}</a>
+    </li>
     {% endfor %}
-</ul>
+  </ul>
+</section>
+{% endblock %}

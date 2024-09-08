@@ -1,87 +1,134 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ОУНБ</title>
-    <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="icon" href="{% static 'img/logo.svg' %}" type="image/x-icon" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
     <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
 
     <!-- jQuery UI -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
-    <!--
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-image: url("/static/images/bg.png"); /* Путь к вашей фоновой картинке */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center center;
-        }
-
-        /* Прямоугольник поверх картинки */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            height: 100%;
-            width: 70%; /* Регулируйте ширину прямоугольника по вашему усмотрению */
-            background-color: white; /* Цвет прямоугольника */
-            opacity: 0.85; /* Прозрачность прямоугольника (от 0 до 1) */
-            z-index: -1; /* Помещаем прямоугольник поверх фона */
-        }
-
-        /* Весь контент вашей страницы будет здесь */
-        .content {
-            position: relative;
-            z-index: 2; /* Помещаем контент поверх прямоугольника */
-        }
-    </style>-->
-
-</head>
-<body>
-    <div class="overlay"></div> 
-    <nav class="navbar navbar-expand-lg navbar-dark" style = "background-color: rgb(13, 41, 140); color: aliceblue;">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{% static 'img/logo.png' %}" alt="BS" height="70">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="row"><span>Карагандинская областная универсальная научная библиотека им. Н.В. Гоголя</span></div>
-           
-            <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
-                <ul class="navbar-nav">
-                    {% block nav_block  %}
-
-                    {% endblock %}
-                </ul>
-            </div>
+  </head>
+  <body>
+    <div class="overlay"></div>
+    <nav
+      class="navbar navbar-expand-lg navbar-dark"
+      style="background-color: rgb(13, 41, 140); color: aliceblue"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}">
+          <img src="{% static 'img/logo.png' %}" alt="BS" height="70" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="row">
+          <span>
+            Карагандинская областная универсальная научная библиотека им.
+            Н.В.Гоголя
+          </span>
         </div>
+
+        <div
+          class="collapse navbar-collapse justify-content-start"
+          id="navbarNav"
+        >
+          <ul class="navbar-nav">
+            {% block nav_block %} {% endblock %}
+          </ul>
+        </div>
+
+        <svg
+          fill="none"
+          height="20"
+          viewBox="0 0 21 20"
+          width="21"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11.3567 1.66667C12.2942 1.66917 12.7701 1.67417 13.1809 1.68584L13.3426 1.69167C13.5292 1.69834 13.7134 1.70667 13.9359 1.71667C14.8226 1.75834 15.4276 1.89834 15.9584 2.10417C16.5084 2.31584 16.9717 2.60251 17.4351 3.06501C17.8588 3.48159 18.1867 3.9855 18.3959 4.54167C18.6017 5.0725 18.7417 5.67751 18.7834 6.56501C18.7934 6.78667 18.8017 6.97084 18.8084 7.15834L18.8134 7.32001C18.8259 7.73001 18.8309 8.20584 18.8326 9.14334L18.8334 9.76501V10.8567C18.8355 11.4645 18.8291 12.0723 18.8142 12.68L18.8092 12.8417C18.8026 13.0292 18.7942 13.2133 18.7842 13.435C18.7426 14.3225 18.6009 14.9267 18.3959 15.4583C18.1873 16.0148 17.8593 16.5189 17.4351 16.935C17.0184 17.3586 16.5145 17.6865 15.9584 17.8958C15.4276 18.1017 14.8226 18.2417 13.9359 18.2833C13.7382 18.2927 13.5404 18.301 13.3426 18.3083L13.1809 18.3133C12.7701 18.325 12.2942 18.3308 11.3567 18.3325L10.7351 18.3333H9.64424C9.03613 18.3354 8.42801 18.329 7.82007 18.3142L7.65841 18.3092C7.46058 18.3017 7.2628 18.2931 7.06507 18.2833C6.17841 18.2417 5.57341 18.1017 5.04174 17.8958C4.48563 17.687 3.98192 17.359 3.56591 16.935C3.14178 16.5186 2.81359 16.0146 2.60424 15.4583C2.39841 14.9275 2.25841 14.3225 2.21674 13.435C2.20746 13.2373 2.19912 13.0395 2.19174 12.8417L2.18757 12.68C2.17222 12.0724 2.16527 11.4645 2.16674 10.8567V9.14334C2.16441 8.53551 2.17053 7.92767 2.18507 7.32001L2.19091 7.15834C2.19757 6.97084 2.20591 6.78667 2.21591 6.56501C2.25757 5.67751 2.39757 5.07334 2.60341 4.54167C2.81267 3.98493 3.14151 3.48086 3.56674 3.06501C3.98265 2.64123 4.48603 2.31333 5.04174 2.10417C5.57341 1.89834 6.17757 1.75834 7.06507 1.71667C7.28674 1.70667 7.47174 1.69834 7.65841 1.69167L7.82007 1.68667C8.42773 1.67187 9.03557 1.66548 9.64341 1.66751L11.3567 1.66667ZM10.5001 5.83334C9.39501 5.83334 8.3352 6.27233 7.5538 7.05373C6.77239 7.83513 6.33341 8.89494 6.33341 10C6.33341 11.1051 6.77239 12.1649 7.5538 12.9463C8.3352 13.7277 9.39501 14.1667 10.5001 14.1667C11.6051 14.1667 12.665 13.7277 13.4464 12.9463C14.2278 12.1649 14.6667 11.1051 14.6667 10C14.6667 8.89494 14.2278 7.83513 13.4464 7.05373C12.665 6.27233 11.6051 5.83334 10.5001 5.83334ZM10.5001 7.50001C10.8284 7.49995 11.1535 7.56456 11.4568 7.69015C11.7601 7.81573 12.0358 7.99984 12.268 8.23194C12.5001 8.46405 12.6843 8.73962 12.81 9.04291C12.9357 9.34621 13.0004 9.67128 13.0005 9.99959C13.0005 10.3279 12.9359 10.653 12.8103 10.9563C12.6848 11.2597 12.5007 11.5353 12.2686 11.7675C12.0364 11.9997 11.7609 12.1839 11.4576 12.3095C11.1543 12.4352 10.8292 12.5 10.5009 12.5C9.83787 12.5 9.20198 12.2366 8.73314 11.7678C8.2643 11.2989 8.00091 10.663 8.00091 10C8.00091 9.33696 8.2643 8.70108 8.73314 8.23224C9.20198 7.7634 9.83787 7.50001 10.5009 7.50001M14.8759 4.58334C14.5996 4.58334 14.3347 4.69309 14.1393 4.88844C13.944 5.08379 13.8342 5.34874 13.8342 5.62501C13.8342 5.90127 13.944 6.16622 14.1393 6.36157C14.3347 6.55693 14.5996 6.66667 14.8759 6.66667C15.1522 6.66667 15.4171 6.55693 15.6125 6.36157C15.8078 6.16622 15.9176 5.90127 15.9176 5.62501C15.9176 5.34874 15.8078 5.08379 15.6125 4.88844C15.4171 4.69309 15.1522 4.58334 14.8759 4.58334Z"
+            fill="#FFFFFF"
+          />
+        </svg>
+
+        <svg
+          fill="none"
+          height="20"
+          viewBox="0 0 20 20"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M5.60698 1.93069L6.99055 1.51355C7.44718 1.37609 7.93821 1.40944 8.37206 1.60738C8.8059 1.80531 9.15293 2.1543 9.34841 2.58926L10.3184 4.7464C10.4868 5.12063 10.5337 5.53819 10.4526 5.94046C10.3715 6.34272 10.1665 6.70949 9.86626 6.98926L8.38984 8.36498C8.19198 8.55283 8.34198 9.28498 9.06484 10.5378C9.78841 11.7914 10.3477 12.2871 10.6056 12.21L12.5398 11.6185C12.9319 11.4986 13.3517 11.5044 13.7403 11.635C14.129 11.7657 14.467 12.0147 14.707 12.3471L16.0856 14.2578C16.364 14.6437 16.4929 15.1175 16.4484 15.5912C16.4039 16.0649 16.1889 16.5064 15.8434 16.8335L14.7777 17.8428C14.4337 18.1686 14.0094 18.3973 13.5481 18.5056C13.0868 18.6139 12.6051 18.5979 12.152 18.4593C9.91912 17.7757 7.85126 15.7471 5.92055 12.4021C3.98555 9.05212 3.25484 6.2264 3.76412 3.91783C3.86684 3.45266 4.09176 3.02329 4.41569 2.67399C4.73962 2.3247 5.15085 2.06811 5.60698 1.93069Z"
+            fill="#FFFFFF"
+          />
+        </svg>
+
+        <svg
+          fill="none"
+          height="20"
+          viewBox="0 0 20 20"
+          width="20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clipRule="evenodd"
+            d="M10.0001 1.66663C5.39758 1.66663 1.66675 5.39746 1.66675 9.99996C1.66675 11.575 2.10425 13.05 2.86508 14.3066L2.12175 16.8333C2.07907 16.9784 2.07626 17.1322 2.11362 17.2788C2.15098 17.4253 2.22712 17.5591 2.33405 17.666C2.44097 17.7729 2.57473 17.8491 2.72126 17.8864C2.86779 17.9238 3.02168 17.921 3.16675 17.8783L5.69341 17.135C6.99231 17.9209 8.48193 18.3354 10.0001 18.3333C14.6026 18.3333 18.3334 14.6025 18.3334 9.99996C18.3334 5.39746 14.6026 1.66663 10.0001 1.66663ZM8.11508 11.8858C9.80091 13.5708 11.4101 13.7933 11.9784 13.8141C12.8426 13.8458 13.6842 13.1858 14.0117 12.42C14.0531 12.3247 14.0681 12.2201 14.0552 12.117C14.0423 12.014 14.002 11.9163 13.9384 11.8341C13.4817 11.2508 12.8642 10.8316 12.2609 10.415C12.1349 10.3279 11.9801 10.2929 11.829 10.3175C11.6778 10.342 11.542 10.4241 11.4501 10.5466L10.9501 11.3091C10.9238 11.3501 10.8828 11.3795 10.8356 11.3913C10.7883 11.4031 10.7384 11.3963 10.6959 11.3725C10.3567 11.1783 9.86258 10.8483 9.50758 10.4933C9.15258 10.1383 8.84258 9.66663 8.66842 9.34913C8.64682 9.30879 8.64058 9.26199 8.65084 9.2174C8.66111 9.17282 8.68719 9.13346 8.72425 9.10663L9.49425 8.53496C9.60414 8.43941 9.67505 8.30679 9.69349 8.16235C9.71193 8.0179 9.67661 7.87172 9.59425 7.75163C9.22091 7.20496 8.78591 6.50996 8.15508 6.04913C8.07367 5.99013 7.9783 5.95334 7.87836 5.94238C7.77842 5.93143 7.67734 5.94667 7.58508 5.98663C6.81841 6.31496 6.15508 7.15663 6.18675 8.02246C6.20758 8.59079 6.43008 10.2 8.11508 11.8858Z"
+            fill="#FFFFFF"
+            fillRule="evenodd"
+          />
+        </svg>
+      </div>
     </nav>
-
-    <div class ="container">
-    {% block content %}
-
-    {% endblock%}
-    </div>
-
-</body>
+    <div class="">{% block content %} {% endblock%}</div>
+  </body>
 </html>

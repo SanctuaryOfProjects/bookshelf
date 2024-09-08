@@ -1,40 +1,89 @@
-<h2>Профиль пользователя</h2>
-<br>
-<a href="{% url 'bookshelf' %}">Моя книжная полка</a>
-<a href="#">Мои комментарии</a>
-<a href="#">Мои обсуждения</a>
-<a href="#">Обратная связь</a>
-<a href="#">Рекомендации</a>
-<br>
-{% if user_profile.full_name %}
-  <p><strong>ФИО:</strong> {{ user_profile.full_name }}</p>
-{% endif %}
-{% if user_profile.photo %}
-<img src="{{ user_profile.photo.url }}" alt="Фото" style="max-width: 200px;">
-{% endif %}
-{% if user_profile.birth_date %}
-  <p><strong>Дата рождения:</strong> {{ user_profile.birth_date|date:"d/m/Y" }}</p>
-{% endif %}
-{% if user_profile.user.email %}
-  <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
-{% endif %}
-{% if user_profile.phone_number %}
-  <p><strong>Номер телефона:</strong> {{ user_profile.phone_number }}</p>
-{% endif %}
-<br>
-<a href="{% url 'edit_profile' %}" class="btn btn-dark">Редактировать профиль</a>
-</div>
+{% extends 'base.html' %} {% load static %} {% block nav_block%}
+<li class="nav-item">
+  <a class="nav-link" href="{% url 'bookshelf' %}">Моя книжная полка</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Мои комментарии</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Мои обсуждения</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Обратная связь</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#">Рекомендации</a>
+</li>
+{% endblock %} {% block content %}
+<section class="container mt-3">
+  <h3>Профиль пользователя</h3>
+  <main style="display: flex; flex-direction: row; gap: 50px">
+    <!-- 1 -->
+    <aside style="width: 40%">
+      <div>
+        {% if user_profile.photo %}
+        <img
+          src="{{ user_profile.photo.url }}"
+          alt="Фото"
+          style="width: 100%"
+        />
+        {% else %}
+        <img src="{% static 'img/unknown.png' %}" alt="" style="width: 100%" />
+        {% endif %}
+      </div>
+      <br />
+      <div>
+        {% if user_profile.full_name %}
+        <h4 style="">{{ user_profile.full_name }}</h4>
+        {% endif %}
+      </div>
+      <div>
+        {% if user_profile.birth_date %}
+        <p>
+          <strong>Дата рождения:</strong> {{
+          user_profile.birth_date|date:"d/m/Y" }}
+        </p>
+        {% endif %}
+      </div>
+      <div>
+        {% if user_profile.user.email %}
+        <p><strong>Email:</strong> {{ user_profile.user.email }}</p>
+        {% endif %}
+      </div>
+      <div>
+        {% if user_profile.phone_number %}
+        <p><strong>Номер телефона:</strong> {{ user_profile.phone_number }}</p>
+        {% endif %}
+      </div>
+      <br />
+      <a href="{% url 'edit_profile' %}" class="btn btn-dark">
+        Редактировать профиль
+      </a>
+    </aside>
 
-{% if form.errors %}
-  <!-- Отображение ошибок формы -->
-  <p>Исправьте следующие ошибки:</p>
-  {{ form.errors }}
-{% endif %}
+    <!-- 2 -->
+    <aside>
+      {% if form.errors %}
+      <!-- Отображение ошибок формы -->
+      <p>Исправьте следующие ошибки:</p>
+      {{ form.errors }} {% endif %}
 
-<!-- Отображение формы -->
-<h3>Заполнить профиль</h3>
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Сохранить</button>
-</form>
+      <!-- Отображение формы -->
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-12">{{ form.full_name }}</div>
+          <div class="col-12">{{ form.photo }}</div>
+          <div class="col-12">{{ form.birth_date }}</div>
+          <div class="col-12">{{ form.phone_number }}</div>
+          <div class="col-12">{{ form.reader_ticket }}</div>
+          <div class="col-12">{{ form.favorite_categories }}</div>
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </form>
+    </aside>
+  </main>
+</section>
+{% endblock %}

@@ -1,16 +1,50 @@
-<h2>Моя книжная полка</h2>
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="container mt-3">
+  <h3>Моя книжная полка</h3>
 
-<ul>
-  {% for bookshelf in bookshelves %}
-    <li>
-      <h3><a href ="{% url 'book_detail' bookshelf.subject.id %}">{{ bookshelf.subject.title }}</a></h3>
-      {% if bookshelf.subject.cover_image %}
-        <img src="{{ bookshelf.subject.cover_image.url }}" alt="Обложка книги" style="max-width: 150px;">
-      {% endif %}
-      <p>Автор: {{ bookshelf.subject.author }}</p>
-      <p>Категория: {{ bookshelf.subject.category }}</p>
+  <ul>
+    {% for bookshelf in bookshelves %}
+    <li
+      class="card"
+      style="
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-direction: row;
+        padding: 10px 25px;
+      "
+    >
+      <div style="display: flex; gap: 20px">
+        <div style="border-radius: 10px; overflow: hidden">
+          {% if bookshelf.subject.cover_image %}
+          <img
+            src="{{ bookshelf.subject.cover_image.url }}"
+            alt="Обложка книги"
+            style="max-width: 150px"
+          />
+          {% endif %}
+        </div>
+        <div>
+          <h3>
+            <a href="{% url 'book_detail' bookshelf.subject.id %}">
+              {{ bookshelf.subject.title }}
+            </a>
+          </h3>
+          <p>Автор: {{ bookshelf.subject.author }}</p>
+          <p>Категория: {{ bookshelf.subject.category }}</p>
+        </div>
+      </div>
+      <button
+        style="height: min-content; background-color: white; border: none"
+      >
+        <i class="bi bi-heart-half"></i>
+      </button>
     </li>
-  {% empty %}
+    {% empty %}
     <li>У вас нет добавленных книг на книжной полке.</li>
-  {% endfor %}
-</ul>
+    {% endfor %}
+  </ul>
+</section>
+
+{% endblock %}

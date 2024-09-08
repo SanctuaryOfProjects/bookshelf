@@ -1,24 +1,71 @@
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="container mt-3 mb-5">
+  <h1>Список книг</h1>
+</section>
 
-<h2>Список книг</h2>
-
-  <form method="get">
-    {{ form.as_p }}
-    <button type="submit">Поиск</button>
+<section class="container mb-5">
+  <!-- filter form -->
+  <form class="row g-3" method="get">
+    <form method="get" class="row g-3">
+      <div class="col-lg-4 col-md-6">{{ form.title }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.category }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.author }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.publisher }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.language }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.format }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.publication_date_from }}</div>
+      <div class="col-lg-4 col-md-6">{{ form.publication_date_to }}</div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Найти книгу</button>
+      </div>
+    </form>
   </form>
+</section>
 
-  <ul>
+<section class="container">
+  <div class="row">
     {% for book in books %}
-      <li>
+    <div class="col-md-4" style="max-width: 250px">
+      <dev class="card h-100">
         {% if book.cover_image %}
-        <img src="{{ book.cover_image.url }}" alt="Обложка книги" style="max-width: 300px;">
+        <div
+          class="w-100 d-flex justify-content-center border-bottom"
+          style="background-color: rgb(195, 195, 195)"
+        >
+          <img
+            src="{{ book.cover_image.url }}"
+            class="card-img-top"
+            alt="Обложка книги"
+          />
+        </div>
         {% endif %}
-        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
-        {{ book.author }}
-        {{ book.category }}
-        {% if book.publisher %} - {{ book.publisher }}{% endif %}
-      </li>
+        <div class="card-body">
+          <h5 class="card-title">
+            <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+          </h5>
+          <p class="card-text">
+            <span> {{ book.author }} {{ book.category }} </span>
+            <span>
+              {% if book.publisher %} - {{ book.publisher }} {% endif %}
+            </span>
+          </p>
+        </div>
+        <div class="card-footer">
+          <div class="d-flex justify-content-between align-items-center">
+            <div><i class="bi bi-book"></i> <span>1.4K</span></div>
+            <div><i class="bi bi-eye"></i> <span>62</span></div>
+            <div><i class="bi bi-star"></i> <span>0</span></div>
+            <div>
+              <i class="bi bi-bookmark"></i>
+            </div>
+          </div>
+        </div>
+      </dev>
+    </div>
     {% empty %}
-      <li>Нет книг, удовлетворяющих выбранным критериям.</li>
+    <li>Нет книг, удовлетворяющих выбранным критериям.</li>
     {% endfor %}
-</ul>
+  </div>
+</section>
+
+{% endblock %}
