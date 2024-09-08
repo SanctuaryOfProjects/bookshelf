@@ -141,9 +141,15 @@ class ReviewForm(forms.ModelForm):
         model = Review
         fields = ['feedback', 'value']
         widgets = {
-            'value': forms.NumberInput(attrs={'min': 1, 'max': 5}),
-            'feedback': forms.Textarea(attrs={'rows': 4}),
+            'value': forms.NumberInput(attrs={'min': 1, 'max': 5, 'class': 'form-control', 'placeholder': 'Введите оценку (1-5)'}),
+            'feedback': forms.Textarea(attrs={'rows': 4, 'class': 'form-control', 'placeholder': 'Ваш отзыв'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Применение классов Bootstrap ко всем полям
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control mb-3'})
 
 class AddToBookshelfForm(forms.ModelForm):
     class Meta:

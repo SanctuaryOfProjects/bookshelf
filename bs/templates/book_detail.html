@@ -1,49 +1,98 @@
-{% block content %}
-  <h2>{{ book.title }}</h2>
-  
-  {% if book.cover_image %}
-    <img src="{{ book.cover_image.url }}" alt="Обложка книги" style="max-width: 300px;">
-  {% endif %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<section class="container mt-5">
+  <!-- Заголовок и информация о книге -->
+  <div class="row">
+    <div class="col-lg-4 text-center">
+      {% if book.cover_image %}
+      <img
+        src="{{ book.cover_image.url }}"
+        alt="{{ book.title }}"
+        class="img-fluid shadow-sm"
+        style="max-width: 100%; border-radius: 10px"
+      />
+      {% endif %}
+    </div>
+    <div class="col-lg-8">
+      <h2 class="mb-4">{{ book.title }}</h2>
+      <p><strong>Автор:</strong> {{ book.author }}</p>
+      <p><strong>Категория:</strong> {{ book.category }}</p>
+      <p><strong>ISBN:</strong> {{ book.isbn }}</p>
+      <p><strong>Дата публикации:</strong> {{ book.publication_date }}</p>
+      <p><strong>Издатель:</strong> {{ book.publisher }}</p>
+      <p><strong>Язык:</strong> {{ book.language }}</p>
+      <p><strong>Формат:</strong> {{ book.get_format_display }}</p>
+      <p><strong>Описание:</strong></p>
+      <p>{{ book.description }}</p>
 
-  <p><strong>Автор:</strong> {{ book.author }}</p>
-  <p><strong>Категория:</strong> {{ book.category }}</p>
-  <p><strong>ISBN:</strong> {{ book.isbn }}</p>
-  <p><strong>Дата публикации:</strong> {{ book.publication_date }}</p>
-  <p><strong>Издатель:</strong> {{ book.publisher }}</p>
-  <p><strong>Язык:</strong> {{ book.language }}</p>
-  <p><strong>Формат:</strong> {{ book.get_format_display }}</p>
-  <p><strong>Описание:</strong> {{ book.description }}</p>
+      {% if book.file %}
+      <a
+        href="{{ book.file.url }}"
+        download
+        class="btn btn-outline-secondary mt-3"
+      >
+        <i class="fas fa-download"></i> Скачать файл
+      </a>
+      {% endif %}
+    </div>
+  </div>
 
-  {% if book.file %}
-    <a href="{{ book.file.url }}" download>Скачать файл</a>
-  {% endif %}
-
-  <form method="post">
-    {% csrf_token %}
-    {{ add_to_bookshelf_form.as_p }}
-    <input type="hidden" name="book_id" value="{{ book.id }}">
-    <button type="submit" name="add_to_bookshelf_submit" class="btn btn-primary">Добавить на полку</button>
-  </form>
-
-  <h3>Отзывы</h3>
-  <ul>
-    {% for review in reviews %}
-      <li>
-        <strong>{{ review.user.username }}</strong>: {{ review.feedback }} (Оценка: {{ review.value }})
-      </li>
-    {% empty %}
-      <li>Нет отзывов для этой книги.</li>
-    {% endfor %}
-  </ul>
-
-  {% if user.is_authenticated %}
-    <h3>Оставьте отзыв</h3>
+  <!-- Форма добавления книги на полку -->
+  <div class="mt-5">
+    <h3 class="mb-3">Добавить на полку</h3>
     <form method="post">
-      {% csrf_token %}
-      {{ review_form.as_p }}
-      <button type="submit">Отправить</button>
+      {% csrf_token %} {{ add_to_bookshelf_form.as_p }}
+      <input type="hidden" name="book_id" value="{{ book.id }}" />
+      <button
+        type="submit"
+        name="add_to_bookshelf_submit"
+        class="btn btn-primary"
+      >
+        <i class="fas fa-bookmark"></i> Добавить на полку
+      </button>
     </form>
+  </div>
+
+  <!-- Отзывы -->
+  <div class="mt-5">
+    <h3>Отзывы</h3>
+    <ul class="list-group">
+      {% for review in reviews %}
+      <li class="list-group-item">
+        <div class="d-flex justify-content-between align-items-center">
+          <strong>{{ review.user.username }}</strong>
+          <span class="badge bg-primary rounded-pill"
+            >Оценка: {{ review.value }}</span
+          >
+        </div>
+        <p class="mb-0 mt-2">{{ review.feedback }}</p>
+      </li>
+      {% empty %}
+      <li class="list-group-item">Нет отзывов для этой книги.</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Форма для оставления отзыва -->
+  {% if user.is_authenticated %}
+  <div class="mt-5">
+    <h3>Оставьте отзыв</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="row g-3">
+        <div class="col-lg-2">{{ review_form.value}}</div>
+        <div class="col-lg-10">{{ review_form.feedback}}</div>
+        <div class="col-12">
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Отправить отзыв
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
   {% else %}
-    <p>Для оставления отзыва <a href="{% url 'login' %}">войдите в систему</a>.</p>
+  <p class="mt-4">
+    Для оставления отзыва <a href="{% url 'login' %}">войдите в систему</a>.
+  </p>
   {% endif %}
+</section>
 {% endblock %}
